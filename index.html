@@ -16,6 +16,18 @@
 
   <script type="text/babel">
     // Your React components go here
+    function ProjectCard (props) {
+      return <h1>{props.name}</h1>
+
+    }
+
+    const projects = ["Passion for Fashion", "Dategent", "Exercise Tracker", "Movie Search"]
+
+    ReactDOM.createRoot(document.getElementById("root")).render(
+      <div>
+        {projects.map(name => <ProjectCard name={name} />)}
+      </div>
+    )
   </script>
 </body>
 </html>
