@@ -16,6 +16,12 @@
 
   <script type="text/babel">
     // Your React components go here
+    function Header (props) {
+      return <div>
+        <h1>Aspiring Web Developer - Nathan Beltran ベルとラン　ネイサン</h1>
+        </div>
+    }
+
     function ProjectCard (props) {
       return <div>
         <h1>{props.name}</h1>
@@ -45,6 +51,7 @@
 
     ReactDOM.createRoot(document.getElementById("root")).render(
       <div>
+        <Header />
         {projects.map(project => <ProjectCard name={project.name}
         description={project.description} link={project.link} />)}
 
