@@ -23,7 +23,7 @@
     }
 
     function ProjectCard (props) {
-      return <div>
+      return <div className="project-card">
         <h1>{props.name}</h1>
         <h2>{props.description}</h2>
         <a href={props.link}>Link</a>
@@ -50,10 +50,13 @@
       }]
 
     ReactDOM.createRoot(document.getElementById("root")).render(
-      <div>
+      <div className="container">
         <Header />
-        {projects.map(project => <ProjectCard name={project.name}
-        description={project.description} link={project.link} />)}
+
+        <div className="projects-grid">
+          {projects.map(project => <ProjectCard name={project.name}
+          description={project.description} link={project.link} />)}
+        </div>
 
       </div>
     )
