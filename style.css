@@ -186,6 +186,27 @@ body {
   color: #16213e;
 }
 
+.team-badge {
+  display: inline-block;
+  background-color: #e94560;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+.project-role {
+  font-size: 0.85rem;
+  color: #16213e;
+  font-weight: 500;
+  margin: -0.25rem 0 0.75rem;
+  line-height: 1.4;
+}
+
 .project-card h2 {
   font-size: 0.95rem;
   font-weight: 400;

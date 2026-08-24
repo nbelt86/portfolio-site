@@ -25,7 +25,8 @@
         aboutTitle: "About",
         aboutText: "I'm a Le Wagon bootcamp graduate based in Osaka, Japan, building full-stack web applications with Ruby on Rails and rebuilding my JavaScript fundamentals from the ground up. I like turning ideas into working products — from AI-powered apps to small tools that solve a real problem.",
         projectsTitle: "Projects",
-        linkLabel: "Link"
+        linkLabel: "Link",
+        teamLabel: "Team Project"
       },
       ja: {
         toggleLabel: "English",
@@ -34,7 +35,8 @@
         aboutTitle: "自己紹介",
         aboutText: "大阪在住のLe Wagon卒業生です。Ruby on Railsを使ったフルスタックのWebアプリケーション開発を行いながら、JavaScriptの基礎を一から学び直しています。AIを活用したアプリから実用的な小さなツールまで、アイデアを形にすることが好きです。",
         projectsTitle: "制作物",
-        linkLabel: "リンク"
+        linkLabel: "リンク",
+        teamLabel: "チームプロジェクト"
       }
     }
 
@@ -43,13 +45,19 @@
       description: "AI powered fashion advice app",
       descriptionJa: "AIを活用したファッションアドバイスアプリ",
       link:"https://passion-for-fashion.onrender.com/",
-      image: "images/passion4fasion-screenshot.png" },
+      image: "images/passion4fasion-screenshot.png",
+      team: true,
+      role: "My role: built the entire frontend.",
+      roleJa: "担当: フロントエンド全体を担当。" },
 
       {name: "Dategent",
       description: "AI powered dating app. Get paired by AI.",
       descriptionJa: "AIを活用したマッチングアプリ。AIがお相手を見つけます。",
       link:"https://nathanswatchlist-d527e9354110.herokuapp.com/",
-      image: "images/dategent-screenshot.png"},
+      image: "images/dategent-screenshot.png",
+      team: true,
+      role: "My role: AI prompt engineering, LLM integration, and the full venue-based matchmaking system.",
+      roleJa: "担当: AIプロンプトエンジニアリング、LLM実装、会場情報を活用したマッチングシステム全体を担当。" },
 
       {name: "Exercise Tracker",
       description: "Track your own workout with the help of this app.",
@@ -78,7 +86,9 @@
       return <div className="project-card">
         <img src={props.image} alt={props.name} className="project-card-image" />
         <h1>{props.name}</h1>
+        {props.team && <span className="team-badge">{props.teamLabel}</span>}
         <h2>{props.description}</h2>
+        {props.role && <p className="project-role">{props.role}</p>}
         <a href={props.link}>{props.linkLabel}</a>
       </div>
 
@@ -121,6 +131,8 @@
         <div className="projects-grid">
           {projects.map(project => <ProjectCard key={project.name} name={project.name}
           description={lang === "en" ? project.description : project.descriptionJa}
+          role={project.team ? (lang === "en" ? project.role : project.roleJa) : null}
+          team={project.team} teamLabel={t.teamLabel}
           link={project.link} image={project.image} linkLabel={t.linkLabel} />)}
         </div>
 
