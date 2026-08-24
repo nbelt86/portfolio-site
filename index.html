@@ -16,11 +16,60 @@
 
   <script type="text/babel">
     // Your React components go here
+
+    const text = {
+      en: {
+        toggleLabel: "日本語",
+        heroTitle: "Aspiring Web Developer - Nathan Beltran",
+        tagline: "Full-Stack Developer — Ruby on Rails & JavaScript",
+        aboutTitle: "About",
+        aboutText: "I'm a Le Wagon bootcamp graduate based in Osaka, Japan, building full-stack web applications with Ruby on Rails and rebuilding my JavaScript fundamentals from the ground up. I like turning ideas into working products — from AI-powered apps to small tools that solve a real problem.",
+        projectsTitle: "Projects",
+        linkLabel: "Link"
+      },
+      ja: {
+        toggleLabel: "English",
+        heroTitle: "Webエンジニア志望 - ベルトラン ネイサン",
+        tagline: "フルスタックエンジニア — Ruby on Rails & JavaScript",
+        aboutTitle: "自己紹介",
+        aboutText: "大阪在住のLe Wagon卒業生です。Ruby on Railsを使ったフルスタックのWebアプリケーション開発を行いながら、JavaScriptの基礎を一から学び直しています。AIを活用したアプリから実用的な小さなツールまで、アイデアを形にすることが好きです。",
+        projectsTitle: "制作物",
+        linkLabel: "リンク"
+      }
+    }
+
+    const projects = [
+      {name: "Passion for Fashion",
+      description: "AI powered fashion advice app",
+      descriptionJa: "AIを活用したファッションアドバイスアプリ",
+      link:"https://passion-for-fashion.onrender.com/",
+      image: "images/passion4fasion-screenshot.png" },
+
+      {name: "Dategent",
+      description: "AI powered dating app. Get paired by AI.",
+      descriptionJa: "AIを活用したマッチングアプリ。AIがお相手を見つけます。",
+      link:"https://nathanswatchlist-d527e9354110.herokuapp.com/",
+      image: "images/dategent-screenshot.png"},
+
+      {name: "Exercise Tracker",
+      description: "Track your own workout with the help of this app.",
+      descriptionJa: "このアプリでワークアウトを記録・管理できます。",
+      link:"https://github.com/nbelt86/exercise-tracker",
+      image: "images/exercise-tracker-screenshot.png"},
+
+      {name: "Movie Search",
+      description:"A movie search app using the OMDB API",
+      descriptionJa: "OMDB APIを使った映画検索アプリ",
+      link: "https://nbelt86.github.io/movie-search-app/",
+      image: "images/movie-search-screenshot.png",
+      }]
+
     function Header (props) {
       return <div className="hero">
+        <button onClick={props.onToggleLang} className="lang-toggle">{props.t.toggleLabel}</button>
         <img src="images/profile.jpg" alt="Nathan Beltran" className="profile-pic" />
-        <h1>Aspiring Web Developer - Nathan Beltran </h1>
-        <p className="tagline">Full-Stack Developer — Ruby on Rails &amp; JavaScript</p>
+        <h1>{props.t.heroTitle}</h1>
+        <p className="tagline">{props.t.tagline}</p>
         <h1 className="name-jp">ベルとラン　ネイサン</h1>
         </div>
     }
@@ -30,7 +79,7 @@
         <img src={props.image} alt={props.name} className="project-card-image" />
         <h1>{props.name}</h1>
         <h2>{props.description}</h2>
-        <a href={props.link}>Link</a>
+        <a href={props.link}>{props.linkLabel}</a>
       </div>
 
     }
@@ -38,12 +87,9 @@
     function AboutSection (props) {
       const skills = ["Ruby on Rails", "JavaScript", "HTML/CSS", "Tailwind CSS", "React", "Hotwire (Turbo/Stimulus)", "PostgreSQL", "Git"]
       return <div className="about-section">
-        <h2 className="section-title section-title-light">About</h2>
+        <h2 className="section-title section-title-light">{props.t.aboutTitle}</h2>
         <p className="about-text">
-          I'm a Le Wagon bootcamp graduate based in Osaka, Japan, building full-stack
-          web applications with Ruby on Rails and rebuilding my JavaScript fundamentals
-          from the ground up. I like turning ideas into working products — from AI-powered
-          apps to small tools that solve a real problem.
+          {props.t.aboutText}
         </p>
         <div className="skills-list">
           {skills.map(skill => <span className="skill-tag" key={skill}>{skill}</span>)}
@@ -61,44 +107,29 @@
       </footer>
     }
 
-    const projects = [
-      {name: "Passion for Fashion",
-      description: "AI powered fashion advice app",
-      link:"https://passion-for-fashion.onrender.com/",
-      image: "images/passion4fasion-screenshot.png" },
+    function App (props) {
+      const [lang, setLang] = React.useState("en")
+      const t = text[lang]
+      const toggleLang = () => setLang(lang === "en" ? "ja" : "en")
 
-      {name: "Dategent",
-      description: "AI powered dating app. Get paired by AI.",
-      link:"https://nathanswatchlist-d527e9354110.herokuapp.com/",
-      image: "images/dategent-screenshot.png"},
+      return <div className="container">
+        <Header t={t} onToggleLang={toggleLang} />
 
-      {name: "Exercise Tracker",
-      description: "Track your own workout with the help of this app.",
-      link:"https://github.com/nbelt86/exercise-tracker",
-      image: "images/exercise-tracker-screenshot.png"},
+        <AboutSection t={t} />
 
-      {name: "Movie Search",
-      description:"A movie search app using the OMDB API",
-      link: "https://nbelt86.github.io/movie-search-app/",
-      image: "images/movie-search-screenshot.png",
-      }]
-
-    ReactDOM.createRoot(document.getElementById("root")).render(
-      <div className="container">
-        <Header />
-
-        <AboutSection />
-
-        <h2 className="section-title section-title-light">Projects</h2>
+        <h2 className="section-title section-title-light">{t.projectsTitle}</h2>
         <div className="projects-grid">
           {projects.map(project => <ProjectCard key={project.name} name={project.name}
-          description={project.description} link={project.link} image={project.image} />)}
+          description={lang === "en" ? project.description : project.descriptionJa}
+          link={project.link} image={project.image} linkLabel={t.linkLabel} />)}
         </div>
 
         <Footer />
 
       </div>
-    )
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />)
   </script>
 </body>
 </html>
