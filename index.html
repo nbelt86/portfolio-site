@@ -18,13 +18,16 @@
     // Your React components go here
     function Header (props) {
       return <div className="hero">
+        <img src="images/profile.jpg" alt="Nathan Beltran" className="profile-pic" />
         <h1>Aspiring Web Developer - Nathan Beltran </h1>
+        <p className="tagline">Full-Stack Developer — Ruby on Rails &amp; JavaScript</p>
         <h1 className="name-jp">ベルとラン　ネイサン</h1>
         </div>
     }
 
     function ProjectCard (props) {
       return <div className="project-card">
+        <img src={props.image} alt={props.name} className="project-card-image" />
         <h1>{props.name}</h1>
         <h2>{props.description}</h2>
         <a href={props.link}>Link</a>
@@ -32,32 +35,65 @@
 
     }
 
+    function AboutSection (props) {
+      const skills = ["Ruby on Rails", "JavaScript", "HTML/CSS", "Tailwind CSS", "React", "Hotwire (Turbo/Stimulus)", "PostgreSQL", "Git"]
+      return <div className="about-section">
+        <h2 className="section-title section-title-light">About</h2>
+        <p className="about-text">
+          I'm a Le Wagon bootcamp graduate based in Osaka, Japan, building full-stack
+          web applications with Ruby on Rails and rebuilding my JavaScript fundamentals
+          from the ground up. I like turning ideas into working products — from AI-powered
+          apps to small tools that solve a real problem.
+        </p>
+        <div className="skills-list">
+          {skills.map(skill => <span className="skill-tag" key={skill}>{skill}</span>)}
+        </div>
+      </div>
+    }
+
+    function Footer (props) {
+      return <footer className="footer">
+        <a href="https://github.com/nbelt86" className="footer-link">GitHub</a>
+        <span className="footer-divider">·</span>
+        <a href="mailto:nbelt86@gmail.com" className="footer-link">nbelt86@gmail.com</a>
+      </footer>
+    }
+
     const projects = [
       {name: "Passion for Fashion",
       description: "AI powered fashion advice app",
-      link:"https://passion-for-fashion.onrender.com/" },
+      link:"https://passion-for-fashion.onrender.com/",
+      image: "images/passion4fasion-screenshot.png" },
 
       {name: "Dategent",
       description: "AI powered dating app. Get paired by AI.",
-      link:"https://www.dategent.net/"},
+      link:"https://nathanswatchlist-d527e9354110.herokuapp.com/",
+      image: "images/dategent-screenshot.png"},
 
       {name: "Exercise Tracker",
       description: "Track your own workout with the help of this app.",
-      link:"..."},
+      link:"https://github.com/nbelt86/exercise-tracker",
+      image: "images/exercise-tracker-screenshot.png"},
 
       {name: "Movie Search",
       description:"A movie search app using the OMDB API",
       link: "https://nbelt86.github.io/movie-search-app/",
+      image: "images/movie-search-screenshot.png",
       }]
 
     ReactDOM.createRoot(document.getElementById("root")).render(
       <div className="container">
         <Header />
 
+        <AboutSection />
+
+        <h2 className="section-title section-title-light">Projects</h2>
         <div className="projects-grid">
-          {projects.map(project => <ProjectCard name={project.name}
-          description={project.description} link={project.link} />)}
+          {projects.map(project => <ProjectCard key={project.name} name={project.name}
+          description={project.description} link={project.link} image={project.image} />)}
         </div>
+
+        <Footer />
 
       </div>
     )
