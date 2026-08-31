@@ -229,3 +229,21 @@ body {
   color: #e94560;
   border-color: #e94560;
 }
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 4rem 1.25rem 3rem;
+  }
+
+  .profile-pic {
+    position: static;
+    display: block;
+    margin: 0 auto 1.25rem;
+    width: 80px;
+    height: 80px;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+}
