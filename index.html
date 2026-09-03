@@ -25,7 +25,8 @@
         aboutTitle: "About",
         aboutText: "I'm a Le Wagon bootcamp graduate based in Osaka, Japan, building full-stack web applications with Ruby on Rails and JavaScript. I like turning ideas into working products — from AI-powered apps to small tools that solve a real problem.",
         projectsTitle: "Projects",
-        linkLabel: "Link",
+        viewLiveLabel: "View Live",
+        viewCodeLabel: "View Code",
         teamLabel: "Team Project"
       },
       ja: {
@@ -35,7 +36,8 @@
         aboutTitle: "自己紹介",
         aboutText: "大阪在住のLe Wagon卒業生です。Ruby on RailsとJavaScriptを使ったフルスタックのWebアプリケーション開発を行っています。AIを活用したアプリから実用的な小さなツールまで、アイデアを形にすることが好きです。",
         projectsTitle: "制作物",
-        linkLabel: "リンク",
+        viewLiveLabel: "サイトを見る",
+        viewCodeLabel: "コードを見る",
         teamLabel: "チームプロジェクト"
       }
     }
@@ -46,6 +48,7 @@
       descriptionJa: "AIを活用したファッションアドバイスアプリ",
       link:"https://passion-for-fashion.onrender.com/",
       image: "images/passion-for-fashion-demo.gif",
+      live: true,
       team: true,
       role: "My role: built the entire frontend.",
       roleJa: "担当: フロントエンド全体を担当。" },
@@ -55,6 +58,7 @@
       descriptionJa: "AIを活用したマッチングアプリ。AIがお相手を見つけます。",
       link:"https://nathanswatchlist-d527e9354110.herokuapp.com/",
       image: "images/dategent-demo.gif",
+      live: true,
       team: true,
       role: "My role: AI prompt engineering, LLM integration, and the full venue-based matchmaking system.",
       roleJa: "担当: AIプロンプトエンジニアリング、LLM実装、会場情報を活用したマッチングシステム全体を担当。" },
@@ -70,7 +74,7 @@
       descriptionJa: "OMDB APIを使った映画検索アプリ",
       link: "https://nbelt86.github.io/movie-search-app/",
       image: "images/movie-search-demo.gif",
-      }]
+      live: true }]
 
     function Header (props) {
       return <div className="hero">
@@ -132,7 +136,8 @@
           description={lang === "en" ? project.description : project.descriptionJa}
           role={project.team ? (lang === "en" ? project.role : project.roleJa) : null}
           team={project.team} teamLabel={t.teamLabel}
-          link={project.link} image={project.image} linkLabel={t.linkLabel} />)}
+          link={project.link} image={project.image}
+          linkLabel={project.live ? t.viewLiveLabel : t.viewCodeLabel} />)}
         </div>
 
         <Footer />
